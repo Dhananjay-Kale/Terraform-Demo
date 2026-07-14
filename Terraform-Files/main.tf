@@ -1,4 +1,17 @@
 #Day-1
+
+
+#remote backend --- S3
+terraform {
+  backend "s3" {
+    bucket = "terraform-backend-bucket"
+    key = "terraform.tfstate"
+    region = "ap-south-1"
+    
+  }
+}
+
+
 #Provider-Block
 provider "aws" {
     region = "ap-south-1"
@@ -145,7 +158,7 @@ resource "aws_instance" "tf-server-4" {
 
   
 }
-*/
+
 # add data script
 resource "aws_instance" "tf-server-4" {
     ami = var.ami
@@ -158,6 +171,17 @@ resource "aws_instance" "tf-server-4" {
                 cd user/share/html
                 echo "<h1>we have to put commands here I am just using echo</h1>" >index.html
                 EOF
+    tags = {
+        Name = "web-4"
+    }
+}
+*/
+#Day 5
+resource "aws_instance" "tf-web-5" {
+    ami = var.ami
+    instance_type = var.instance_type
+    key_name = var.key
+    availability_zone = var.az
     tags = {
         Name = "web-4"
     }

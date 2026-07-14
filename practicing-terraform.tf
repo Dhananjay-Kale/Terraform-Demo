@@ -71,7 +71,7 @@ resource "aws_instance" "tf-server-2" {
     instance_type = "t3.micro"
     key_name = "devops-key"
 # Use security group created by terraform
-    vpc_security_group_ids = []
+    vpc_security_group_ids = [aws_security_group.tf-SG.id]     #refer the terraform resources
     tags = {
         Name = "server-2"
     }
@@ -82,7 +82,7 @@ resource "aws_security_group" "tf-SG" {
     name = "my-sg"
     vpc_id = "vpc-0ea0e58132290a92b"
 # Define inbound rule
-    ingress = {
+    ingress {
         description = "allow ssh"
         to_port = 22
         from_port = 22
@@ -103,6 +103,7 @@ resource "aws_security_group" "tf-SG" {
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }
+# define outbound rules
     egress {
         description = "alllow all traffic"
         to_port = 0

@@ -1,3 +1,3 @@
 # Terraform
 
-This Repository was made when i was practicing Terraform
+This Repository was made when I was practicing Terraform

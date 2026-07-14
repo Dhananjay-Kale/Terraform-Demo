@@ -63,7 +63,7 @@ resource "aws_instance" "tf-server-1" {
         Name = "each"
     }  
 }
-*/
+
 
 #Day 2
 resource "aws_instance" "tf-server-2" {
@@ -108,7 +108,40 @@ resource "aws_security_group" "tf-SG" {
         description = "alllow all traffic"
         to_port = 0
         from_port = 0
-        protocol = -1
+        protocol = "-1"
         cidr_blocks = ["0.0.0.0/0"]
     }
+    lifecycle {
+    create_before_destroy = false 
+    }
+}
+
+
+
+#day 3
+#Variable
+
+resource "aws_instance" "tf-server-3" {
+    ami = "ami-0b910d1016287a5e7"
+    instance_type = "t3.micro"
+    key_name = "devops-key"
+    tags = {
+        Name = "web-3"
+    }
+
+  
+}
+*/
+
+#Day 4
+resource "aws_instance" "tf-server-4" {
+    ami = var.ami
+    instance_type = var.instance_type 
+    key_name = var.key
+    availability_zone = var.az
+    tags = {
+        Name = "web-4"
+    }
+
+  
 }

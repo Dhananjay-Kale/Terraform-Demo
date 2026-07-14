@@ -131,7 +131,7 @@ resource "aws_instance" "tf-server-3" {
 
   
 }
-*/
+
 
 #Day 4
 resource "aws_instance" "tf-server-4" {
@@ -144,4 +144,21 @@ resource "aws_instance" "tf-server-4" {
     }
 
   
+}
+*/
+# add data script
+resource "aws_instance" "tf-server-4" {
+    ami = var.ami
+    instance_type = var.instance_type 
+    key_name = var.key
+    availability_zone = var.az
+    user_data = <<-EOF
+                #!/bin/bash
+                yum update
+                cd user/share/html
+                echo "<h1>we have to put commands here I am just using echo</h1>" >index.html
+                EOF
+    tags = {
+        Name = "web-4"
+    }
 }
